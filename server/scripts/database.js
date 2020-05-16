@@ -10,6 +10,7 @@ async function listDatabases(client){
 async function main() {
   const uri =
     'mongodb+srv://SEI:PFdJpjQqR4lDSJI4@sei-j1km6.azure.mongodb.net/test?retryWrites=true&w=majority';
+  // const url = 'mongodb://localhost:27017';
   const client = new MongoClient(uri);
 
   try {
