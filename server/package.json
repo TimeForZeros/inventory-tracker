@@ -19,6 +19,7 @@
     "http-error": "0.0.6",
     "http-errors": "^1.7.3",
     "jsonwebtoken": "^8.5.1",
+    "method-override": "^3.0.0",
     "mongo": "^0.1.0",
     "mongodb": "^3.5.7",
     "mongoose": "^5.9.13",

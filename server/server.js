@@ -1,11 +1,28 @@
+const config = require('config');
 const createError = require('http-errors');
 const express = require('express');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
+const mongoose = require('mongoose');
 const cors = require('cors');
+const methodOverride = require('method-override');
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
+
+mongoose.connect('mongodb://localhost:27017/fridge', {
+// mongoose.connect('mongodb://localhost:27017/fridge', {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+  useCreateIndex: true,
+  useFindAndModify: false
+});
+
+const db = mongoose.connection;
+
+db.once('connected', () => {
+  console.log(`Connected to MongoDB ${db.name} at ${db.host}:${db.port}`);
+});
 
 const app = express();
 
@@ -15,6 +32,7 @@ app.set('view engine', 'ejs');
 
 app.use(cors());
 app.use(logger('dev'));
+app.use(methodOverride('_method'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
