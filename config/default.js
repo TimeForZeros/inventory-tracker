@@ -8,4 +8,5 @@ module.exports = {
   app: {
     port: '9001',
   },
+    jwtSecret: 'St00opitd',
 };

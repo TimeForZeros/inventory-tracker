@@ -1,4 +1,4 @@
-const config = require('config');
+// const config = require('config');
 const createError = require('http-errors');
 const express = require('express');
 const path = require('path');
@@ -9,9 +9,9 @@ const cors = require('cors');
 const methodOverride = require('method-override');
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
-
+// TODO check why the heck this doesn't work with a variable
 mongoose.connect('mongodb://localhost:27017/fridge', {
-// mongoose.connect('mongodb://localhost:27017/fridge', {
+// mongoose.connect('mongodb://localhost:27017/fridge', { 
   useNewUrlParser: true,
   useUnifiedTopology: true,
   useCreateIndex: true,

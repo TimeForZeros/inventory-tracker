@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
-const bcrypt = require('bcrypt');
+// const bcrypt = require('bcrypt');
 
-const SALT_ROUNDS = 6;
+// const SALT_ROUNDS = 6;
 const { Schema } = mongoose;
 
 const userSchema = new mongoose.Schema({
@@ -23,17 +23,24 @@ userSchema.set('toJSON', {
 });
 
 userSchema.pre('save', function(next) {
-  const user = this;
-  if (!user.isModified('password')) return next();
-  bcrypt.hash(user.password, SALT_ROUNDS, (err, hash) => {
-    if (err) return next(err);
-    user.password = hash;
-    return next();
-  });
+  // const user = this;
+  // if (!user.isModified('password')) return next();
+  return next();
+  // bcrypt.hash(user.password, SALT_ROUNDS, (err, hash) => {
+  //   if (err) return next(err);
+  //   user.password = hash;
+  //   return next();
+  // });
 });
 
+// userSchema.methods.comparePassword = function(tryPassword, cb) {
+//   bcrypt.compare(tryPassword, this.password, cb);
+// }
 userSchema.methods.comparePassword = function(tryPassword, cb) {
-  bcrypt.compare(tryPassword, this.password, cb);
+  if (tryPassword === this.password) {
+    return cb(null, true);
+  }
+  // bcrypt.compare(tryPassword, this.password, cb);
 }
 
 module.exports = mongoose.model('User', userSchema);
